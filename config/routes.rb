@@ -1,7 +1,8 @@
 SampleApp::Application.routes.draw do
 
+  resources :users # declaring the users resource so that we can view users of the system by ID#
+
   # match '/this_is_the_new_path_to_be_matched', :to => 'this#path'
-	get "users/new"
 
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
