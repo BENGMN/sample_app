@@ -5,9 +5,9 @@ SampleApp::Application.routes.draw do
   # match '/this_is_the_new_path_to_be_matched', :to => 'this#path'
 
   match '/contact', :to => 'pages#contact'
-  match '/about', :to => 'pages#about'
-  match '/help', :to => 'pages#help'
-  match '/signup', :to => 'users#new'
+  match '/about',   :to => 'pages#about'
+  match '/help',    :to => 'pages#help'
+  match '/signup',  :to => 'users#new'
 
   root :to => 'pages#home'
 
