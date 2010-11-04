@@ -35,7 +35,15 @@ class User < ActiveRecord::Base
 	  encrypted_password == encrypt(submitted_password)
         end
 
+	def self.authenticate(email, submitted_password)
+	      user = find_by_email(email)
+	      return nil if user.nil?
+	      return user if user.has_password?(submitted_password)
+	end
+
 	private
+	
+	  # Note that salt is a private attribute of this class
 
 	  def encrypt_password
 	    self.salt = make_salt if new_record?
@@ -45,7 +53,9 @@ class User < ActiveRecord::Base
 	  def encrypt(string)
 		secure_hash("#{salt}--#{string}")
 	  end
-
+	
+	  # Salt is created when a new user record is created. The purpose of salt is to add more complexity to the users password
+	  # and to ensure(most likely) that the password for each user is unique.
 	  def make_salt
 	    secure_hash("#{Time.now.utc}--#{password}")
 	  end
